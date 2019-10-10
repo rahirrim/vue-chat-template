@@ -1,0 +1,5 @@
+@mixin flex-block($justify-content, $vert-value) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $vert-value;
+}
