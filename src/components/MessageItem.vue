@@ -81,6 +81,7 @@ export default {
 }
 
 .MessageItem__date {
+    height: 100%;
     color: #B7C0C8;
     font-size: 10px;
     line-height: 14px;

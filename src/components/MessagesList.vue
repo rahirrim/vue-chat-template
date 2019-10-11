@@ -30,6 +30,8 @@ export default {
 
 .MessageList {
     width: 100%;
+    max-height: 100%;
+    overflow-y: scroll;
     padding: 40px 16px 40px 40px;
     @include flex-block(flex-start, flex-start);
     flex-direction: column;

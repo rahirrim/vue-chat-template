@@ -9,8 +9,13 @@ export default new Router({
     base:   process.env.BASE_URL,
     routes: [
         {
+            path:     '/',
+            redirect: '/threads/1',
+        },
+        {
             path:      '/threads',
             name:      'thread',
+            redirect:  '/threads/1',
             component: () => import('./views/Chat.vue'),
             children:  [
                 { path: ':id', component: Thread },

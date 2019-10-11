@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 import MessagesList from '@/components/MessagesList.vue';
 
 export default {
@@ -14,16 +14,12 @@ export default {
         MessagesList,
     },
     mounted() {
-        this.loadInitialState({ threadId: this.$route.params.id });
+        this.setCurrentThread(this.$route.params.id);
+        this.$nextTick(() => this.$emit('scrollBottom'))
     },
     methods: {
-        /**
-         * Method description.
-         */
-        doSomthing() {
-        },
         ...mapActions([
-            'loadInitialState',
+            'setCurrentThread',
         ]),
     },
 };
@@ -33,11 +29,9 @@ export default {
 @import '~@/styles/mixins.scss';
 
 .Thread {
-    width: calc(100% - 300px);
+    width: 100%;
     height: 100%;
     @include flex-block(flex-start, flex-start);
-    background-color: #ffffff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 </style>
 

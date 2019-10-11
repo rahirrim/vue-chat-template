@@ -41,6 +41,7 @@ export default {
 
     &.active {
         background-color: #ffffff;
+        border-left: 1px solid #398BFF;
     }
 }
 

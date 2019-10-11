@@ -11,10 +11,12 @@ Vue.use(Vuex);
  * @type {Object}
  */
 export const stateData = {
+    currentUser: {
+        name: 'vasya'
+    },
     threadsList:   [],
     currentThread: {},
     message:       {},
-    messagesList:  [],
 };
 
 /**
@@ -32,7 +34,6 @@ export const getters = {
     messagesList({ currentThread }) {
         return currentThread.parts;
     },
-
 };
 
 /**
@@ -42,32 +43,26 @@ export const getters = {
  */
 export const actions = {
     /**
-     * Выполняет загрузку данных для инициализации формы.
+     * Выполняет загрузку начальных данных.
      *
      * @param {Function} commit
+     * @param {Function} dispatch
      * @param {number}   threadId - id открытого треда (диалога)
      */
-    loadInitialState({ commit }, { threadId = 1 }) {
-        const currentThread = allThreads.find(thread => +thread.id === +threadId);
-
+    loadInitialState({ commit, dispatch }, threadId = 1) {
         commit('setThreadList', {
             threadsList: allThreads,
         });
-        commit('setCurrentThread', {
-            currentThread
-        });
-        commit('setMessageList', {
-            messagesList: currentThread.parts
-        });
 
+        dispatch('setCurrentThread', threadId);
     },
 
     /**
      * Выполняет установку текущего треда.
      *
-     * @param {Object} state
+     * @param {Object}   state
      * @param {Function} commit
-     * @param {number} threadId - id открытого треда (диалога)
+     * @param {number}   threadId - id открытого треда (диалога)
      */
     setCurrentThread({ state, commit }, threadId) {
         const currentThread = state.threadsList.find(thread => +thread.id === +threadId);
@@ -117,23 +112,13 @@ export const mutations = {
     },
 
     /**
-     * Выполняет установку списка сообщений для открытого треда.
-     *
-     * @param {Object} state
-     * @param {number} message
-     */
-    setMessageList(state, { messagesList }) {
-        state.messagesList = messagesList;
-    },
-
-    /**
      * Выполняет установку нового сообщения.
      *
      * @param {Object} state
      * @param {number} message
      */
     setNewMessage(state, { message }) {
-        state.messagesList = [...state.messagesList, message];
+        state.currentThread.parts = [...state.currentThread.parts, message];
     },
 };
 
