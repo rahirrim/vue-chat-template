@@ -1,5 +1,8 @@
 <template>
-    <div class="ThreadItem">
+    <div
+        class="ThreadItem"
+        :class="{ active: +$route.params.id === thread.id}"
+    >
         <div class="ThreadItem__title">
             <h1 class="ThreadItem__subject">
                 {{ thread.subject }}
@@ -31,8 +34,14 @@ export default {
     width: 100%;
     height: 100px;
     padding: 20px;
+    cursor: pointer;
     background-color: #F3F6F8;
     border-bottom: 1px solid #E9EDF2;
+    text-decoration: none;
+
+    &.active {
+        background-color: #ffffff;
+    }
 }
 
 .ThreadItem__title {

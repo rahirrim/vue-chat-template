@@ -1,6 +1,6 @@
 <template>
     <div class="Thread">
-        <MessagesList :messages-list="messagesList" />
+        <MessagesList />
     </div>
 </template>
 
@@ -12,11 +12,6 @@ export default {
     name:       'Thread',
     components: {
         MessagesList,
-    },
-    computed: {
-        ...mapState([
-            'messagesList',
-        ]),
     },
     mounted() {
         this.loadInitialState({ threadId: this.$route.params.id });

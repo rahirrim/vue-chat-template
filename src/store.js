@@ -29,8 +29,8 @@ export const getters = {
      * @param  {Array<Object>} items
      * @return {Array<Object>}
      */
-    nestedItems({ items }) {
-        return [];
+    messagesList({ currentThread }) {
+        return currentThread.parts;
     },
 
 };
@@ -60,6 +60,21 @@ export const actions = {
             messagesList: currentThread.parts
         });
 
+    },
+
+    /**
+     * Выполняет установку текущего треда.
+     *
+     * @param {Object} state
+     * @param {Function} commit
+     * @param {number} threadId - id открытого треда (диалога)
+     */
+    setCurrentThread({ state, commit }, threadId) {
+        const currentThread = state.threadsList.find(thread => +thread.id === +threadId);
+
+        commit('setCurrentThread', {
+            currentThread
+        });
     },
 
     /**

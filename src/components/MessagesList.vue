@@ -9,19 +9,19 @@
 </template>
 
 <script>
-import MessageItem from '@/components/MessageItem.vue';
+import MessageItem    from '@/components/MessageItem.vue';
+import { mapGetters } from 'vuex';
 
 export default {
     name:       'MessagesList',
     components: {
         MessageItem,
     },
-    props: {
-        messagesList: {
-            type:    Array,
-            default: () => []
-        },
-    },
+    computed: {
+        ...mapGetters([
+            'messagesList',
+        ]),
+    }
 };
 </script>
 

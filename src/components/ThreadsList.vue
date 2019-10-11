@@ -8,11 +8,13 @@
             v-for="thread in threadsList"
             :key="thread.id"
             :thread="thread"
+            @click.native="selectThread(thread.id)"
         />
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import ThreadItem from '@/components/ThreadItem.vue';
 
 export default {
@@ -26,6 +28,23 @@ export default {
             default: () => []
         },
     },
+    methods: {
+        /**
+         * Открывает выбранный тред
+         */
+        selectThread(threadId) {
+            if (+this.$route.params.id === threadId) {
+                return;
+            }
+
+            this.$router.push({ path: `/threads/${threadId}` });
+            this.setCurrentThread(threadId);
+        },
+
+        ...mapActions([
+            'setCurrentThread',
+        ]),
+    }
 };
 </script>
 
