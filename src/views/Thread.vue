@@ -14,7 +14,6 @@ export default {
         MessagesList,
     },
     mounted() {
-        this.setCurrentThread(this.$route.params.id);
         this.$nextTick(() => this.$emit('scrollBottom'))
     },
     methods: {

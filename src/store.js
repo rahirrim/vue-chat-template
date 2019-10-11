@@ -14,9 +14,11 @@ export const stateData = {
     currentUser: {
         name: 'vasya'
     },
-    threadsList:   [],
-    currentThread: {},
-    message:       {},
+    threadsList:        [],
+    currentThread:      {},
+    threadLoading:      false,
+    messageSendLoading: false,
+    message:            {},
 };
 
 /**
@@ -67,9 +69,15 @@ export const actions = {
     setCurrentThread({ state, commit }, threadId) {
         const currentThread = state.threadsList.find(thread => +thread.id === +threadId);
 
+        commit('setThreadLoading', true);
+
         commit('setCurrentThread', {
             currentThread
         });
+
+        setTimeout(() => {
+            commit('setThreadLoading', false);
+        }, 1500)
     },
 
     /**
@@ -119,6 +127,27 @@ export const mutations = {
      */
     setNewMessage(state, { message }) {
         state.currentThread.parts = [...state.currentThread.parts, message];
+    },
+
+    /**
+     * Выполняет установку состояния загрузки треда.
+     *
+     * @param {Object} state
+     * @param {boolean} value
+     */
+    setThreadLoading(state, value) {
+        console.log(value)
+        state.threadLoading = value;
+    },
+
+    /**
+     * Выполняет установку состояния загрузки отправки сообщения.
+     *
+     * @param {Object} state
+     * @param {boolean} value
+     */
+    setMessageSendLoading(state, value) {
+        state.messageSendLoading = value;
     },
 };
 

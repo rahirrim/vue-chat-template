@@ -4,14 +4,12 @@
             <span class="ThreadsList__title-text">Сообщения</span>
             <span class="ThreadsList__title-count">151</span>
         </div>
-        <router-link
+        <ThreadItem
             v-for="thread in threadsList"
             :key="thread.id"
-            :to="`/threads/${thread.id}`"
-            class="ThreadsList__link"
-        >
-            <ThreadItem :thread="thread" />
-        </router-link>
+            :thread="thread"
+            @click.native="selectThread(thread.id)"
+        />
     </div>
 </template>
 
@@ -31,6 +29,18 @@ export default {
         },
     },
     methods: {
+        /**
+         * Открывает выбранный тред
+         */
+        selectThread(threadId) {
+            if (+this.$route.params.id === threadId) {
+                return;
+            }
+
+            this.$router.push({ path: `/threads/${threadId}` });
+            this.setCurrentThread(threadId);
+        },
+
         ...mapActions([
             'setCurrentThread',
         ]),
@@ -67,9 +77,5 @@ export default {
     color: #D2D8DE;
     font-size: 14px;
     line-height: 20px;
-}
-
-.ThreadsList__link {
-    text-decoration: none;
 }
 </style>
