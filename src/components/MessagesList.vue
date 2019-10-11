@@ -26,7 +26,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.MessageList {
+@import '~@/styles/mixins.scss';
 
+.MessageList {
+    width: 100%;
+    padding: 40px 16px 40px 40px;
+    @include flex-block(flex-start, flex-start);
+    flex-direction: column;
+    align-self: flex-end;
 }
 </style>

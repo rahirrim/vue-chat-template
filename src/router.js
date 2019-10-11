@@ -9,16 +9,11 @@ export default new Router({
     base:   process.env.BASE_URL,
     routes: [
         {
-            path:      '/',
-            name:      'home',
-            component: Home,
-        },
-        {
-            path:      '/thread/:id',
+            path:      '/threads',
             name:      'thread',
-            component: () => import(/* webpackChunkName: "about" */ './views/Home.vue'),
+            component: () => import('./views/Chat.vue'),
             children:  [
-                { path: '', component: Thread },
+                { path: ':id', component: Thread },
             ]
         },
     ],
